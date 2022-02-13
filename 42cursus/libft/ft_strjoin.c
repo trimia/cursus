@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/16 23:38:04 by mmariani          #+#    #+#             */
-/*   Updated: 2022/02/13 19:15:49 by mmariani         ###   ########.fr       */
+/*   Created: 2022/02/13 17:28:08 by mmariani          #+#    #+#             */
+/*   Updated: 2022/02/13 20:00:53 by mmariani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *restrict str, const char *restrict src, size_t size)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	i;
-	size_t	j;
-	size_t	len_str;
-	size_t	len_src;
+	char	*str;
+	size_t	size;
+	size_t	len1;
+	size_t	len2;
 
-	i = 0;
-	len_str = ft_strlen(str);
-	len_src = ft_strlen(src);
-	j = len_str;
-	if (len_str < size - 1 && size > 0)
-	{
-		while (src[i] && (len_str + i) < size - 1)
-			str[j++] = src[i++];
-		str[j] = '\0';
-	}
-	if (len_str >= size)
-		len_str = size;
-	return (len_str + len_src);
+	if (!s1 || !s2)
+		return (NULL);
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	size = ft_strlen(s1) + ft_strlen(s2);
+	str = (char *) malloc (sizeof(char) * (size + 1));
+	if (!str)
+		return (NULL);
+	while (len1--)
+		*str++ = *s1++;
+	while (len2--)
+		*str++ = *s2++;
+	*str = '\0';
+	return (str - size);
 }
