@@ -6,7 +6,7 @@
 /*   By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 12:45:18 by mmariani          #+#    #+#             */
-/*   Updated: 2022/02/13 17:30:39 by mmariani         ###   ########.fr       */
+/*   Updated: 2022/02/16 13:24:35 by mmariani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ char	*ft_strrchr(const char *s, int c)
 	if (c == 0)
 		return ((char *)s);
 	while (--s >= str)
-	{
 		if (*s == (char)c)
 			return ((char *)s);
-	}
 	return (NULL);
 }
