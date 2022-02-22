@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trimia <trimia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:39:29 by mmariani          #+#    #+#             */
-/*   Updated: 2022/02/18 12:57:33 by trimia           ###   ########.fr       */
+/*   Updated: 2022/02/22 13:37:19 by mmariani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,71 +21,76 @@
 		return (1);
 	return (0);
 }
- int ft_count(char *s, char c)
+
+ int	ft_count(char *s, char c)
 {
 	size_t	i;
-	while(*s++)
+	
+	i = 0;
+	s--;
+	while (*++s==c)
+		;
+	while(*++s)
 		if (ft_strchrboolean(*s,c))
 			i++;
 	return (i);
 }
 
-
-char	**ft_rsplit(char const *s, char c, size_t j, size_t start)
+char	**ft_rsplit(char *s, char c, char **str, int x)
 {
 	size_t	i;
-	size_t	x;
-	char	**str;
-	char	*a;
+	static char	k = 0;
+	char *a;
 
-	a=(char *)s;	
-	i = 0;
-	x = ft_count((char *)s,c);
-	str = (char **)malloc(sizeof(char *) * (x + 1));
-	if (!str)
-		return (NULL);
-
-	// k = 0;
+	i =0;
+	a = (char *)s;	
 	s--;
 	while (*(++s))
 	{
 		if (ft_strchrboolean(*s,c))
 		{
-			// k++;
-			break;
+			k++;
+			break ;
 		}
-		i++;	
+		i++;
 	}
-	*str++ = ft_substr(a, start, i);
-	str++;
-	start += i;
-	// if (k == ft_count(a, c))
-	// 	return (str);
-	return (ft_rsplit(s+1, c,j,start));
+	*str = ft_substr(a, 0, i);
+	if (!(k == x))
+		ft_rsplit(++s, c, str + 1, k);
+	return (str);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	size_t j,start;
-	j=0;
-	start=0;
+	size_t	x;
 	char	*a;
+	char	**str;
 
+	a=(char *)s;	
+	x = ft_count((char *)s,c) + 1;
+	printf("%zu",x);
+	str = (char **)malloc(sizeof(char *) * (x + 1));
+	if (!str)
+		return (NULL);
+	while (*s==c)
+		s++;
 	a=(char *)s;
-	(ft_rsplit(a,c,j,start));
+	str = ft_rsplit(a,c,str,x);
+	return (str);
 
 }
 
-int main ()
-{
-	char **prova;
-	int i =0;
-	prova = ft_split("lorem+ipsum+dolor+sit+amet,+consectetur+adipiscing+elit.+Sed+non+risus.+Suspendisse", '+');
-	while (i<11){
-	printf("%s",prova[i]);
-	i++;
-	}
+// int main ()
+// {
+// 	char **prova;
+// 	int i;
+// 	prova = ft_split("lorem+ipsum+dolor+sit+amet,+consectetur++adipiscing+elit.+Sed+non+risus.+Suspendisse++", '+');
+// 	// while (i<11){
+// 	// printf("%s",prova[i]);
+// 	// i++;
+// 	for(i = 0; i <= 11; i++)
+//     printf("\n Element is: %s \n", prova[i]);
 
-	// printf("%d",ft_strchrboolean("lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse", ' '));
+// 	// printf("%d",ft_strchrboolean("lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse", ' '));
 	
-}
+// }
