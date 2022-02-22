@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trimia <trimia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:39:29 by mmariani          #+#    #+#             */
-/*   Updated: 2022/02/17 13:02:11 by mmariani         ###   ########.fr       */
+/*   Updated: 2022/02/18 12:57:33 by trimia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 
 
 
-static int	ft_strchrboolean( char s, char c)
+ int	ft_strchrboolean( char s, char c)
 {
 	if (s == c)
 		return (1);
 	return (0);
 }
-static int ft_count(char *s, char c)
+ int ft_count(char *s, char c)
 {
 	size_t	i;
 	while(*s++)
@@ -34,9 +34,16 @@ static int ft_count(char *s, char c)
 char	**ft_rsplit(char const *s, char c, size_t j, size_t start)
 {
 	size_t	i;
+	size_t	x;
 	char	**str;
-	
+	char	*a;
+
+	a=(char *)s;	
 	i = 0;
+	x = ft_count((char *)s,c);
+	str = (char **)malloc(sizeof(char *) * (x + 1));
+	if (!str)
+		return (NULL);
 
 	// k = 0;
 	s--;
@@ -49,20 +56,23 @@ char	**ft_rsplit(char const *s, char c, size_t j, size_t start)
 		}
 		i++;	
 	}
-	str[j] = ft_substr(a, start, i);
-	j++;
+	*str++ = ft_substr(a, start, i);
+	str++;
 	start += i;
 	// if (k == ft_count(a, c))
 	// 	return (str);
-	return (ft_rsplit(s, c,j,start));
+	return (ft_rsplit(s+1, c,j,start));
 }
 
 char	**ft_split(char const *s, char c)
 {
+	size_t j,start;
+	j=0;
+	start=0;
 	char	*a;
 
 	a=(char *)s;
-	ft_rsplit(a,c,0,0);
+	(ft_rsplit(a,c,j,start));
 
 }
 
