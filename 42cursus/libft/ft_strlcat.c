@@ -6,13 +6,13 @@
 /*   By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 23:38:04 by mmariani          #+#    #+#             */
-/*   Updated: 2022/02/13 19:15:49 by mmariani         ###   ########.fr       */
+/*   Updated: 2022/02/25 11:03:18 by mmariani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *restrict str, const char *restrict src, size_t size)
+size_t	ft_strlcat(char *str, const char *src, size_t size)
 {
 	size_t	i;
 	size_t	j;

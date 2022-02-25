@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trimia <trimia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:39:29 by mmariani          #+#    #+#             */
-/*   Updated: 2022/02/25 00:36:30 by trimia           ###   ########.fr       */
+/*   Updated: 2022/02/25 10:45:05 by mmariani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ char	**ft_split(char const *s, char c)
 	// char	*b;
 
 	// *b = c;
+	if (s==NULL)
+		return (NULL);
 	a = ft_strtrim(s,&c);	
 	x = ft_count((char *)s,c) + 1;
 	str = (char **)malloc(sizeof(char *) * (x + 1));
@@ -85,22 +87,26 @@ char	**ft_split(char const *s, char c)
 	while (*s==c)
 		s++;
 	str = ft_rsplit(a,c,str,x);
+	str[x]= 0;
 	return (str);
 }
 
 // int main ()
 // {
 // 	char **prova;
-// 	int i;
-// 	prova = ft_split("      split       this for   me  !       ", ' ');
+// 	int i=0;
+// 	prova = ft_split("   lorem   ipsum dolor     sit amet, consectetur   adipiscing elit. Sed non risus. Suspendisse   ", ' ');
 // 	// while (i<11){
 // 	// printf("%s",prova[i]);
 // 	// i++;
 // 	// int size = sizeof prova / sizeof *prova;
 // 	// printf("len is %d",size);
 	
-// 	for(i = 0; i <= 4; i++)
-//     printf("\n Element is: %s \n", prova[i]);
+// 	// for(i = 0; i <= 4; i++)
+// 	while(prova[i]!=NULL){
+//     printf("%s\n", prova[i]);
+// 	i++;
+// 	}
 
 // 	// printf("%d",ft_strchrboolean("lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse", ' '));	
 // }
