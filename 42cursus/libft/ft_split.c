@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trimia <trimia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:39:29 by mmariani          #+#    #+#             */
-/*   Updated: 2022/02/25 13:27:10 by mmariani         ###   ########.fr       */
+/*   Updated: 2022/02/26 15:45:45 by trimia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,21 +93,3 @@ char	**ft_split(char const *s, char c)
 	free(a);
 	return (str);
 }
-
-// int main ()
-// {
-// 	char **prova;
-// 	int i=0;
-// 	prova = ft_split("     ",' ');
-// 	// while (i<11){
-// 	// printf("%s",prova[i]);
-// 	// i++;
-// 	// int size = sizeof prova / sizeof *prova;
-// 	// printf("len is %d",size);	
-// 	for(i = 0; i <= 4; i++)
-// 	while(prova[i]!=NULL){
-//     // printf("%s\n", prova);
-// 	i++;
-// 	}
-// 	// printf("%d",ft_strchrboolean("lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse", ' '));	
-// }
