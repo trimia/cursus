@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: trimia <trimia@student.42.fr>              +#+  +:+       +#+         #
+#    By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/13 13:12:30 by mmariani          #+#    #+#              #
-#    Updated: 2022/02/26 00:00:39 by trimia           ###   ########.fr        #
+#    Updated: 2022/03/01 11:46:35 by mmariani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,8 @@ SRCS = ft_isalpha.c	\
 	   ft_strjoin.c \
 	   ft_strtrim.c \
 	   ft_split.c	\
-	   ft_itoa.c
+	   ft_itoa.c	\
+	   ft_strmapi.c
 OBJS = $(SRCS:.c=.o)
 CC 		=	gcc
 CFLAGS 	=	-Wall -Werror -Wextra -c

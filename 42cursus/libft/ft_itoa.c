@@ -3,69 +3,95 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trimia <trimia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 23:58:57 by trimia            #+#    #+#             */
-/*   Updated: 2022/02/26 02:59:18 by trimia           ###   ########.fr       */
+/*   Updated: 2022/02/26 21:41:13 by mmariani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-int		ft_recursive_power(int nb, int power)
+static int	ft_power(int nb, int power)
 {
 	int x;
 
 	x = nb;
 	if (power == 0)
 		return (1);
-
-	while (power--)
+	while (--power)
 		nb *= x;
 	return (nb);
 }
-
-char *ft_itoa(int n)
+static int	ft_count(int n)
 {
-	char	*str;
-	int		x,j;
-	size_t	i;
-	
-	i = -1;
-	x = n;
-	n = n * 10;
+	int	i;
+
+	i = 0;
+	if (n == 0)
+		return (1);
 	while (n)
 	{
 		n = n / 10;
 		i++;
 	}
-	str = (char *)malloc(sizeof(char) * i +1);
+	return (i);
+}
+char	*ft_itoa(int n)
+{
+	char	*str;
+	char	*temp;
+	int		j;
+	int		i;
+			
+	if (n == -2147483648)
+	{
+		str = ft_strdup("-2147483648");
+		if (!str)
+			return (NULL);
+		return(str);
+	}
+	i = ft_count(n);
+
+	str = (char *)malloc(sizeof(char) * (i + 2));
 	if (!str)
 		return (NULL);
-	if (x < 0)
+		temp = str;
+	if (n < 0)
 	{
-		x = x * - 1;
-		*str = '-';
+		n = n * - 1;
+		*str = 45;
 	}
-	str--;
-	i=i+1;
-	while (--i)
+	else
+		str--;
+	while (i--)
 	{	
-		if(x<10)
-			j = (x%ft_recursive_power(10,i));
-		j = (x/ft_recursive_power(10,i));
+		if(n < 10)
+			j = n;
+		else
+			j = (n/ft_power(10,i));
 		*++str = j + '0';
-		x = x - j * ft_recursive_power(10,i);
+		n = n - j * ft_power(10,i);
 	}
-	// *str = '\0';
-	return (str - ft_strlen(str));
+	
+	*++str = '\0';
+	return (temp);
 }
 
-int main ()
-{
-	char	*a;
-	
-	a = ft_itoa(234);
-	printf("%s",a);
-}
+// int main ()
+// {
+// 	char	*a;
+// 	char	*c;
+
+// 	// printf("%d", INT_MIN);
+// 	a= ft_itoa(-2147483648);
+// 	// c = itoa(-2147483647);
+// 	// int b=-2147483647;
+//     // char buffer[20];
+//    // c = itoa(b,buffer,2);
+// 	printf("%s\n",a);
+// 	return (0);
+// }

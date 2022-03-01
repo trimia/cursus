@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trimia <trimia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:39:29 by mmariani          #+#    #+#             */
-/*   Updated: 2022/02/26 15:45:45 by trimia           ###   ########.fr       */
+/*   Updated: 2022/02/26 18:56:10 by mmariani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strchrboolean(char s, char c)
+static int	ft_strchrboolean(char s, char c)
 {	
 	if (s == c)
 		return (1);
 	return (0);
 }
 
-int	ft_count(char *s, char c)
+static int	ft_count(char *s, char c)
 {
 	size_t	i;
 	char	*a;
