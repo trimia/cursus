@@ -6,7 +6,7 @@
 #    By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/13 13:12:30 by mmariani          #+#    #+#              #
-#    Updated: 2022/03/01 11:46:35 by mmariani         ###   ########.fr        #
+#    Updated: 2022/03/03 11:36:53 by mmariani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,9 @@ SRCS = ft_isalpha.c	\
 	   ft_strtrim.c \
 	   ft_split.c	\
 	   ft_itoa.c	\
-	   ft_strmapi.c
+	   ft_strmapi.c	\
+	   ft_striteri.c	\
+	   ft_putchar_fd.c
 OBJS = $(SRCS:.c=.o)
 CC 		=	gcc
 CFLAGS 	=	-Wall -Werror -Wextra -c
