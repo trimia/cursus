@@ -6,7 +6,7 @@
 /*   By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 23:29:50 by mmariani          #+#    #+#             */
-/*   Updated: 2022/03/03 13:07:19 by mmariani         ###   ########.fr       */
+/*   Updated: 2022/03/04 11:06:39 by mmariani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char    *ft_strnstr(const char *big, const char *little, size_t len)
     if (*little == '\0')   // little가 NULL이라면 바로 big문자열 반환
         return ((char *)big);
     i = 0;                
-    while (big[i] != '\0' && i < lenmake )  // 널을 만나기 전까지 루프, 그리고 정해진 len안에서 루프를 반복하는 것이므로 i < len인데 여기서 같은 문자가 마지막에 있으면 문제가 생긴다.
+    while (big[i] != '\0' && i < len)  // 널을 만나기 전까지 루프, 그리고 정해진 len안에서 루프를 반복하는 것이므로 i < len인데 여기서 같은 문자가 마지막에 있으면 문제가 생긴다.
     {
         if (big[i] == little[0]) // 만약 빅을 돌때 little과 같다면
             if (!ft_strncmp(big + i, little, little_len)) //strncmp를 사용해서 0을 반환할지 아닐지 정함

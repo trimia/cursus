@@ -6,7 +6,7 @@
 /*   By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:39:29 by mmariani          #+#    #+#             */
-/*   Updated: 2022/02/26 18:56:10 by mmariani         ###   ########.fr       */
+/*   Updated: 2022/03/04 11:48:11 by mmariani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	**ft_split(char const *s, char c)
 	char	**str;
 
 	a = ft_strtrim(s, &c);
-	if (s == NULL || a == NULL) 
+	if (s == NULL || a == NULL)
 		return (NULL);
 	if (ft_strlen(a) == 0)
 	{
