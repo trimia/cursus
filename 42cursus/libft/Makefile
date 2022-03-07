@@ -6,7 +6,7 @@
 #    By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/13 13:12:30 by mmariani          #+#    #+#              #
-#    Updated: 2022/03/04 12:01:34 by mmariani         ###   ########.fr        #
+#    Updated: 2022/03/07 19:47:56 by mmariani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,15 +56,15 @@ CC 		=	gcc
 CFLAGS 	=	-Wall -Werror -Wextra -c
 
 BONUS =	ft_lstnew.c			\
- 		# ft_lstadd_front.c	\
-		# ft_lstsize.c		\
-		# ft_lstlast.c		\
-		# ft_lstadd_back.c	\
-		# ft_lstdelone.c		\
-		# ft_lstclear.c		\
-		# ft_lstclear.c		\
-		# ft_lstiter.c		\
-		# ft_lstmap.c
+ 		ft_lstadd_front.c	\
+		ft_lstsize.c		\
+		ft_lstlast.c		\
+		ft_lstadd_back.c	\
+		ft_lstdelone.c		\
+		ft_lstclear.c		\
+		ft_lstiter.c		\
+		ft_lstmap.c
+
 OBJS_BONUS = $(BONUS:.c=.o)
 
 
@@ -73,21 +73,23 @@ all: $(NAME)
 $(OBJS):
 	$(CC) $(CFLAGS) $(SRCS)
 
+$(OBJS_BONUS):
+	$(CC) $(CFLAGS) $(BONUS)
+
 $(NAME): $(OBJS)
 	ar rcs libft.a $(OBJS)
-	ranlib $(NAME)
+	# ranlib $(NAME)
 
 clean:
-	rm -rf $(OBJS)
+	rm -rf $(OBJS) $(OBJS_BONUS)
 
 fclean: clean
 	rm -rf $(NAME)
 
 re:		fclean all
 
-bonus:
-	$(CC) $(FLAGS) $(BONUS)
-	ar -rf $(NAME) $(OBJS_BONUS)
+bonus: $(OBJS_BONUS)
+	ar rcs libft.a $(OBJS_BONUS)
 
 
 .PHONY: all fclean re clean bonus

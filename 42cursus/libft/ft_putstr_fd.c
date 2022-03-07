@@ -6,7 +6,7 @@
 /*   By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 09:46:05 by mmariani          #+#    #+#             */
-/*   Updated: 2022/03/04 11:40:45 by mmariani         ###   ########.fr       */
+/*   Updated: 2022/03/07 19:01:57 by mmariani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
+	if (!s)
+		return ;
 	while (*s)
 		ft_putchar_fd(*s++, fd);
 }
