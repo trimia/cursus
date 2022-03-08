@@ -6,17 +6,17 @@
 /*   By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 17:52:06 by mmariani          #+#    #+#             */
-/*   Updated: 2022/03/07 17:58:21 by mmariani         ###   ########.fr       */
+/*   Updated: 2022/03/08 18:19:11 by mmariani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
 
-int		ft_lstsize(t_list *lst)
+int	ft_lstsize(t_list *lst)
 {
-	int i;
+	int	i;
 
-	if(!lst)
+	if (!lst)
 		return (0);
 	i = 0;
 	while (lst != NULL)

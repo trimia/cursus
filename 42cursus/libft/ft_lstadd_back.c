@@ -6,7 +6,7 @@
 /*   By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 18:02:53 by mmariani          #+#    #+#             */
-/*   Updated: 2022/03/07 20:10:34 by mmariani         ###   ########.fr       */
+/*   Updated: 2022/03/08 18:18:17 by mmariani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_list *temp;
-	
+	t_list	*temp;
+
 	if (lst)
 	{
 		if (*lst == NULL)

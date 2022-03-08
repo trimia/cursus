@@ -6,7 +6,7 @@
 /*   By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 17:37:48 by mmariani          #+#    #+#             */
-/*   Updated: 2022/03/07 19:08:03 by mmariani         ###   ########.fr       */
+/*   Updated: 2022/03/08 18:16:08 by mmariani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 t_list	*ft_lstnew(void *content)
 {
-	t_list *nodo;
+	t_list	*nodo;
+
 	nodo = malloc(sizeof(t_list));
-	if (!nodo)
+	if (! nodo)
 		return (NULL);
 	nodo->content = content;
 	nodo->next = NULL;
