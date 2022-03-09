@@ -6,7 +6,7 @@
 /*   By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 13:24:13 by trimia            #+#    #+#             */
-/*   Updated: 2022/03/01 11:25:48 by mmariani         ###   ########.fr       */
+/*   Updated: 2022/03/09 19:35:37 by mmariani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (ft_strdup(""));
 	if (ft_strlen(s) < len)
 		len = ft_strlen(s);
-	str = malloc(len + 1);
+	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (NULL);
-	ft_strlcpy((char *)str, (const char *)(s + start), len + 1);
+	ft_strlcpy((char *)str, (const char *)(s + start), len +1);
 	return (str);
 }
