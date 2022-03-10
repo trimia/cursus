@@ -6,12 +6,12 @@
 /*   By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:39:29 by mmariani          #+#    #+#             */
-/*   Updated: 2022/03/10 00:46:57 by mmariani         ###   ########.fr       */
+/*   Updated: 2022/03/10 16:35:52 by mmariani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
+#include <stdio.h>
 static int	ft_strchrboolean(char s, char c)
 {	
 	if (s == c)
@@ -37,7 +37,7 @@ static int	ft_count(char *s, char c)
 	return (i);
 }
 
-static char	**ft_rsplit(char *s, char c, char **str, int x)
+char	**ft_rsplit(char *s, char c, char **str, int x)
 {
 	size_t		i;
 	size_t		flag;
@@ -86,10 +86,15 @@ char	**ft_split(char const *s, char c)
 	a = ft_strtrim(s, (const char *)sensei);
 	if (a == NULL || !s)
 		return (NULL);
-	if (ft_strlen(a) == 0 || c == 0)
-		return ((char **)s);
-		x = ft_count(a, c) + 1;
-	str = (char **)malloc(sizeof(char *) * (x + 1));
+	if (ft_strlen(a) == 0 || c == 0 || c == 48)
+	{
+		str = malloc(sizeof(char *) * 1);
+		str[0] = malloc(sizeof(char) * (ft_strlen(s) + 1));
+		free(a);
+		return (str);
+	}
+	x = ft_count(a, c) + 1;
+	str = (char **)malloc(sizeof(char *) * (x));
 	if (!str)
 		return (NULL);
 	str[x] = 0;
@@ -99,33 +104,33 @@ char	**ft_split(char const *s, char c)
 	free(a);
 	return (str);
 }
-// int main ()
-// {
-// 	char const *s1 = "HELLO";
-// 	char const *s2 = "YOYOY";
-// 	char *s = "NULLO";
-// 	unsigned int start = 0;
-// 	size_t len = 5;
-// 	int n = 0;
-// 	char c = 0;
-// 	char **test;
-// 	char *yo;
-// 	printf("__SPLIT__\n");
-// 	// test = ft_split(s1, c);
-// 	// while (test && test[n])
-// 	// 	free(test[n++]);
-// 	// free(test);
-// 	// test = ft_split(s1, 0);
-// 	// while (test && test[n])
-// 	// 	free(test[n++]);
-// 	// free(test);
-// 	// test = ft_split("", c);
-// 	// while (test && test[n])
-// 	// 	free(test[n++]);
-// 	// free(test);
-// 	test = ft_split("tripouille", 0);
-// 	while (test && test[n])
-// 		free(test[n++]);
-// 	free(test);
-// 	printf("\033[32mAll good !\n\n\033[37m");
-// }
+int main ()
+{
+	char const *s1 = "HELLO";
+	char const *s2 = "YOYOY";
+	char *s = "NULLO";
+	unsigned int start = 0;
+	size_t len = 5;
+	int n = 0;
+	char c = 0;
+	char **test;
+	char *yo;
+	printf("__SPLIT__\n");
+	test = ft_split(s1, c);
+	while (test && test[n])
+		free(test[n++]);
+	free(test);
+	// test = ft_split(s1, 0);
+	// while (test && test[n])
+	// 	free(test[n++]);
+	// free(test);
+	// test = ft_split("", c);
+	// while (test && test[n])
+	// 	free(test[n++]);
+	// free(test);
+	// test = ft_split("tripouille", 0);
+	// while (test && test[n])
+	// 	free(test[n++]);
+	// free(test);
+	printf("\033[32mAll good !\n\n\033[37m");
+}
