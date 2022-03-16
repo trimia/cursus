@@ -6,106 +6,77 @@
 /*   By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:39:29 by mmariani          #+#    #+#             */
-/*   Updated: 2022/03/10 20:21:28 by mmariani         ###   ########.fr       */
+/*   Updated: 2022/03/15 17:22:46 by mmariani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**ft_stilltoomanylines(char **str, char *a)
+int	count_strings(char const *s, char c)
 {
-	str = malloc(sizeof(char *) * 2);
-	if (!str)
-		return (NULL);
-	str[0] = NULL;
-	str[1] = NULL;
-	free(a);
-	return (str);
-}
+	int	act_pos;
+	int	str_count;
 
-static int	ft_count(char *s, char c)
-{
-	size_t	i;
-	char	*a;
-
-	a = s;
-	i = 0;
-	s--;
-	while (*++s)
+	act_pos = 0;
+	str_count = 0;
+	if (s[act_pos] == c)
+		str_count--;
+	while (s[act_pos] != '\0')
 	{
-		if (*s == c)
-			i++;
-		while (*s == c)
-			s++;
+		if (s[act_pos] == c && s[act_pos + 1] != c && s[act_pos + 1] != '\0')
+			str_count++;
+		act_pos++;
 	}
-	return (i);
+	str_count++;
+	return (str_count);
 }
 
-char	**ft_rsplit(char *s, char c, char **str, int x)
+char	*malloc_strings(const char *s, char c)
 {
-	size_t		i;
-	size_t		flag;
-	static char	k = 0;
-	char		*a;
+	char	*word;
+	int		i;
 
 	i = 0;
-	flag = 0;
-	a = (char *)s;
-	s--;
-	while (*(++s))
+	while (s[i] && s[i] != c)
+		i++;
+	word = (char *)malloc(sizeof(char) * (i + 1));
+	if (!word)
+		return (NULL);
+	i = 0;
+	while (s[i] && s[i] != c)
 	{
-		if (*s == c)
-		{
-			k++;
-			break ;
-		}
+		word[i] = s[i];
 		i++;
 	}
-	*str = ft_substr(a, 0, i);
-	while (*s == c)
-			s++;
-	if (!(k == x) && *s)
-		ft_rsplit(s, c, str + 1, k);
-	return (str);
-}
-
-char	**ft_toomanylines(char **str, char *a, char const *s)
-{
-	str = malloc(sizeof(char *) * 2);
-	if (!str)
-		return (NULL);
-	str[0] = malloc(sizeof(char) * (ft_strlen(s) + 1));
-	if (!str[0])
-		return (NULL);
-	str[1] = NULL;
-	ft_strlcpy(str[0], s, ft_strlen(s) + 1);
-	free(a);
-	return (str);
+	word[i] = '\0';
+	return (word);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	size_t	x;
-	char	*a;
-	char	**str;
-	char	sensei[2];
+	int		words;
+	char	**tab;
+	int		i;
 
-	str = NULL;
-	sensei[0] = c;
-	sensei[1] = 0;
-	a = ft_strtrim(s, (const char *)sensei);
-	if (s == NULL || a == NULL || ft_strlen(a) == 0)
-		return (ft_stilltoomanylines(str, a));
-	if (ft_strlen(a) == 0 || c == 0)
-		return (ft_toomanylines(str, a, s));
-	x = ft_count(a, c) + 1;
-	str = (char **)malloc(sizeof(char *) * (x + 1));
-	if (!str)
+	if (!s)
 		return (NULL);
-	str[x] = 0;
-	while (*s == c)
-		s++;
-	str = ft_rsplit(a, c, str, (x + 1));
-	free(a);
-	return (str);
+	words = count_strings(s, c);
+	tab = (char **)malloc(sizeof(char *) * (words + 1));
+	if (!tab)
+		return (NULL);
+	i = 0;
+	while (*s)
+	{
+		while (*s && *s == c)
+			s++;
+		if (*s && *s != c)
+		{
+			tab[i] = malloc_strings(s, c);
+			i++;
+			while (*s && *s != c)
+				s++;
+		}
+	}
+	tab[i] = NULL;
+	return (tab);
 }
