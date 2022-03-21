@@ -6,74 +6,154 @@
 /*   By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 16:05:59 by mmariani          #+#    #+#             */
-/*   Updated: 2022/03/16 20:36:41 by mmariani         ###   ########.fr       */
+/*   Updated: 2022/03/21 21:54:15 by mmariani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"get_next_line.h"
 
-char	*get_next_line(int fd)
+static char	*readfd(char *line_n, int fd)
 {
 	char		*buffer;
-	static char	*line_n;
-	char		*temp;
-		
-	line_n = NULL;
-	temp = NULL;
 	buffer = (char *) malloc (sizeof(char) * (BUFFER_SIZE + 1));
-	while (!ft_find(line_n, '\n') && read(fd, buffer, BUFFER_SIZE) > 0)
+	if (!buffer)
+		return (NULL);
+	while (read(fd, buffer, BUFFER_SIZE) > 0)
 	{
 		line_n = ft_strjoin(line_n, buffer);
-		ft_memcpy(line_n, temp);
-		
+		if (ft_find(line_n))
+			break;
 	}
-	return (temp);
+	free (buffer);
+	return (line_n);
 }
 
-#include <stdio.h>
-#include <fcntl.h>
-#include <limits.h>
+char	*get_next(char *line_n)
+{
+	char	*temp;
+	int		i;
 
-// int main(int argc, char **argv)
+	i = 0;
+	if (!line_n)
+		return(NULL);
+	while (line_n[i] != '\n')
+		i++;
+	temp = (char *) malloc (sizeof(char) * i);
+	if (!temp)
+		return (NULL);
+	temp = ft_strdup("");
+	while (*line_n != '\n')
+		*temp++ = *line_n++;
+	
+	if (*line_n++ == '\n')
+		temp[i] ='\n';
+	else
+		temp[i] ='\0';
+	// free (line_n);
+	return (temp - i);
+}
+
+char	*get_next_line(int fd)
+{
+	char		*temp;
+	int			i;
+	static char	*line_n;
+		
+	i = 0;
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+		return (NULL);
+	line_n = readfd(line_n, fd);
+	temp = get_next(line_n);
+	free(line_n);
+	return (temp);
+
+	
+
+
+	// if (!line_n)
+	// 	return(NULL);
+	// while (line_n[i] != '\n')
+	// 	i++;
+	// temp = (char *) malloc (sizeof(char) * i);
+	// if (!temp)
+	// 	return (NULL);
+	// temp = ft_strdup("");
+	// while (*line_n != '\n')
+	// 	*temp++ = *line_n++;
+	
+	// if (*line_n++ == '\n')
+	// 	temp[i] ='\n';
+	// else
+	// 	temp[i] ='\0';
+	// // free (line_n);
+	// return (temp - i);
+
+}
+
+// #include <stdio.h>
+// #include <fcntl.h>
+// #include <limits.h>
+
+// int main ()
 // {
-// 	int fd, ret, line_count;
-// 	char *line;
+// 	int fd;
 
-// 	line_count = 1;
-// 	ret = 0;
-// 	line = NULL;
-// 	if (argc == 2)
-// 	{
-// 		fd = open(argv[1], O_RDONLY);
-// 		while ((ret = get_next_line(fd, &line)) > 0)
-// 		{
-// 			printf(" \n [ Return: %d ] | A line has been read #%d => %s\n", ret, line_count, line);
-// 			line_count++;
-// 			free(line);
-// 		}
-// 		printf(" \n [ Return: %d ] A line has been read #%d: %s\n", ret, line_count++, line);
-// 		printf("\n");
-// 		if (ret == -1)
-// 			printf("-----------\n An error happened\n");
-// 		else if (ret == 0)
-// 		{
-// 			printf("-----------\n EOF has been reached\n");
-// 			free(line);
-// 		}
-// 		close(fd);
-// 	}
-// 	if (argc == 1)
-// 	{
-// 		while ((ret = get_next_line(0, &line)) > 0)
-// 		{
-// 			printf("[Return: %d] Line #%d: %s\n", ret, line_count, line);
-// 			line_count++;
-// 		}
-// 		if (ret == -1)
-// 			printf("\n An error happened\n");
-// 		else if (ret == 0)
-// 			printf("\n EOF has been reached\n");
-// 		close(fd);
-// 	}
+// 	fd = open("text.txt", O_RDONLY); 
+// 	printf("%s",get_next_line(fd));
+
+// }
+
+
+
+// #include <stdio.h>
+// #include <fcntl.h>
+// #include <limits.h>
+// int	main(void)
+// {
+// 	/*
+// 	Here, In this code first open() returns 3 because when main process created,
+// 	then fd 0, 1, 2 are already taken by stdin, stdout and stderr.
+// 	*/
+// 	char *temp;
+// 	char *temp2;
+// 	int file_descriptor = open("text.txt", O_RDONLY);
+// 	//printf("file_descriptor: %d \n", file_descriptor);
+// 	temp = get_next_line(file_descriptor);
+// 	temp2 = get_next_line(file_descriptor);
+// 	printf("%s", temp);
+// 	free(temp);
+// 	printf("%s", temp2);
+// 	free(temp2);
+// 	/*
+// 	printf("\n\n");
+// 	printf("%s$", get_next_line(file_descriptor));
+// 	printf("\n\n");
+// 	printf("%s$", get_next_line(file_descriptor));
+// 	printf("\n\n");
+// 	*/
 // 	return (0);
+// }
+
+// char	*get_next_line(int fd)
+// {
+// 	int	rd;
+// 	int	i = 0;
+// 	char	c;
+// 	char	*buffer = malloc(9999);
+
+// 	while ((rd = read(fd, &c, 1) > 0))
+// 	{
+// 		buffer[i] = c;
+// 		i++;
+// 		if (c == '\n')
+// 			break ;
+// 	}
+// 	if ((!buffer[i - 1] && !rd) || rd == -1)
+// 	{
+// 		free(buffer);
+// 		return (NULL);
+// 	}
+// 	i++;
+// 	buffer[i] = '\0';
+// 	return (buffer);
 // }

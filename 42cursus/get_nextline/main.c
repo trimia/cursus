@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include "get_next_line.h"
 
-int		get_next_line(int fd, char **line);
 
 int	main()
 {
@@ -11,10 +10,10 @@ int	main()
 	int		fd;
 	char	*line;
 
-//*lineÀÌ ¼±¾ðµÈ »óÅÂ·Î get_next_line ÇÔ¼ö·Î ³Ñ¾î°¨
+//*lineï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ get_next_line ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½Ñ¾î°¨
 
 	fd = open("text.txt", O_RDONLY);
-	while ((ret = (get_next_line(fd, &line)) > 0))
+	while ((ret = (get_next_line(fd) > 0)))
 	{
 		printf("%s\n", line);
 		free(line);
