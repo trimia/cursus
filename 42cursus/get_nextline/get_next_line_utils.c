@@ -6,7 +6,7 @@
 /*   By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 17:45:58 by mmariani          #+#    #+#             */
-/*   Updated: 2022/03/21 21:27:29 by mmariani         ###   ########.fr       */
+/*   Updated: 2022/03/22 15:36:51 by mmariani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	unsigned char	*str_src;
 
 	i = 0;
-	if (dst == NULL && src == NULL)
-		return (NULL);
+	// if (dst == NULL && src == NULL)
+	// 	return (NULL);
 	str_dst = (unsigned char *)dst;
 	str_src = (unsigned char *)src;
 	while (n--)
@@ -69,13 +69,14 @@ char	*ft_strdup(const char *s1)
 {
 	char	*str;
 
-	str = (char *)malloc (sizeof(*s1) * (ft_strlen(s1) + 1));
+	str = (char *)malloc (sizeof(char) * (ft_strlen(s1) + 1));
 	if (!str)
 		return (NULL);
 	ft_memcpy(str, s1, ft_strlen(s1));
 	*(str + ft_strlen(s1)) = '\0';
 	return (str);
 }
+
 char	*ft_strjoin(char *str, char const *buffer)
 {
 	char	*dest;
@@ -89,8 +90,8 @@ char	*ft_strjoin(char *str, char const *buffer)
 	size = ft_strlen(str) + ft_strlen(buffer);
 	dest = ft_strdup("");
 	// dest = (char *) malloc (sizeof(char) * (size + 1));//sensei dixit "nondeveallocare!!!"
-	// if (!dest)
-	// 	return (NULL);
+	if (!dest)
+		return (NULL);
 	if (str)
 	{
 		while (len1--)

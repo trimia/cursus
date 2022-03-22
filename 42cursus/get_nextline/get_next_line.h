@@ -6,7 +6,7 @@
 /*   By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 16:31:06 by mmariani          #+#    #+#             */
-/*   Updated: 2022/03/21 21:49:39 by mmariani         ###   ########.fr       */
+/*   Updated: 2022/03/22 19:21:45 by mmariani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 #include <stdio.h>
 #include <fcntl.h>
 
-// #ifndef BUUFER_SIZE
-// #define BUFFER_SIZE 3
-// #endif
+#ifndef BUUFER_SIZE
+#define BUFFER_SIZE 3
+#endif
 
 char	*ft_find(char *str);
 size_t	ft_strlen(const char *str);
