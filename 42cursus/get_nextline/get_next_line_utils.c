@@ -6,30 +6,31 @@
 /*   By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 17:45:58 by mmariani          #+#    #+#             */
-/*   Updated: 2022/03/22 15:36:51 by mmariani         ###   ########.fr       */
+/*   Updated: 2022/03/25 21:50:02 by mmariani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"get_next_line.h"
 
-char	*ft_find(char *str)
+int	ft_find(char *str)
 {
-	unsigned char k;
 	int i;
-	
-	k = '\n';
+
 	i = 0;
-	while (str[i] != k)
-		if (!str[i++])
-			return (NULL);
-	return ((char *)&str[i]);
-	// while(*str++ != k);
-	// 	if  (!*str)
-	// 		return (NULL);
-	// return (str);
+	if (!str)
+		return (1);
+	while (str[i] != '\0')
+	{
+		if (str[i] == '\n')
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
-size_t	ft_strlen(const char *str)
+
+
+int	ft_strlen(const char *str)
 {
 	int	i;
 
@@ -56,8 +57,8 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	unsigned char	*str_src;
 
 	i = 0;
-	// if (dst == NULL && src == NULL)
-	// 	return (NULL);
+	if (dst == NULL && src == NULL)
+		return (NULL);
 	str_dst = (unsigned char *)dst;
 	str_src = (unsigned char *)src;
 	while (n--)
@@ -68,6 +69,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 char	*ft_strdup(const char *s1)
 {
 	char	*str;
+	// char	*temp;
 
 	str = (char *)malloc (sizeof(char) * (ft_strlen(s1) + 1));
 	if (!str)
@@ -80,26 +82,62 @@ char	*ft_strdup(const char *s1)
 char	*ft_strjoin(char *str, char const *buffer)
 {
 	char	*dest;
-	size_t	size;
-	size_t	len1;
-	size_t	len2;
+	int	size;
+	int	len1;
+	int	len2;
+	int		i;
+	int		j;
+
+	i = -1;
+
 
 	
 	len1 = ft_strlen(str);
 	len2 = ft_strlen(buffer);
 	size = ft_strlen(str) + ft_strlen(buffer);
-	dest = ft_strdup("");
-	// dest = (char *) malloc (sizeof(char) * (size + 1));//sensei dixit "nondeveallocare!!!"
+	if (!str)
+	{
+		str = malloc(sizeof(char));
+		str[0] = '\0';
+	}
+	dest = (char *) malloc (sizeof(char) * (size + 1));//sensei dixit "nondeveallocare!!!"
 	if (!dest)
 		return (NULL);
 	if (str)
+		while (++i < len1)
+			dest[i] = str[i];
+	j = -1;
+	while (++j < len2)
+		dest[i++] = buffer[j];
+	dest[i] = '\0';
+	return (dest);
+}
+
+size_t	ft_strlcpy(char *str, const char *src, size_t size)
+{
+	size_t	i;
+
+	i = ft_strlen(src);
+	if (size != 0)
 	{
-		while (len1--)
-			*dest++ = *str++;
-		//free (str);
+		while (*src && --size)
+			*str++ = *src++;
+		*(str) = '\0';
 	}
-	while (len2--)
-		*dest++ = *buffer++;
-	*dest = '\0';
-	return (dest - size);
+	return (i);
+}
+
+char	*ft_substr(char const *s, unsigned int start, int len)
+{
+	char	*str;
+
+	if (!s || len == 0 || start >= (size_t)ft_strlen(s))
+		return (ft_strdup(""));
+	if (ft_strlen(s) < len)
+		len = ft_strlen(s);
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (NULL);
+	ft_strlcpy((char *)str, (const char *)(s + start), len +1);
+	return (str);
 }
