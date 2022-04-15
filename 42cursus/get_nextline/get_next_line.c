@@ -6,7 +6,7 @@
 /*   By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 16:05:59 by mmariani          #+#    #+#             */
-/*   Updated: 2022/03/25 21:46:46 by mmariani         ###   ########.fr       */
+/*   Updated: 2022/04/15 19:24:28 by mmariani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,13 @@ static char	*readfd(char *line_n, int fd)
 		return (NULL);
 	while (ft_find(line_n))
 	{
-		if(read(fd, buffer, BUFFER_SIZE)>0)
+		if(read(fd, buffer, BUFFER_SIZE) > 0)
 			line_n = ft_strjoin(line_n, buffer);
+		else
+			{
+				free(buffer);
+				return (NULL);
+			}
 	}
 	free (buffer);
 	return (line_n);
