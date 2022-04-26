@@ -17,8 +17,6 @@ int	ft_find(char *str)
 	int i;
 
 	i = 0;
-	if (!str)
-		return (1);
 	while (str[i] != '\0')
 	{
 		if (str[i] == '\n')
@@ -27,8 +25,6 @@ int	ft_find(char *str)
 	}
 	return (1);
 }
-
-
 
 int	ft_strlen(const char *str)
 {
@@ -41,14 +37,6 @@ int	ft_strlen(const char *str)
 		i++;
 	return (i);
 }
-
-// void ft_memcpy(char *s1, char *s2)
-// {
-// 	while (*s1  != '\n')
-// 		*s2++ = *s1++;
-// }
-
-
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
@@ -66,10 +54,9 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	return (dst);
 }
 
-char	*ft_strdup(const char *s1)
+char	*ft_strdup(char *s1)
 {
 	char	*str;
-	// char	*temp;
 
 	str = (char *)malloc (sizeof(char) * (ft_strlen(s1) + 1));
 	if (!str)
@@ -79,19 +66,16 @@ char	*ft_strdup(const char *s1)
 	return (str);
 }
 
-char	*ft_strjoin(char *str, char const *buffer)
+char	*ft_strjoin(char *str, char *buffer)
 {
 	char	*dest;
-	int	size;
-	int	len1;
-	int	len2;
+	int		size;
+	int		len1;
+	int		len2;
 	int		i;
 	int		j;
 
 	i = -1;
-
-
-	
 	len1 = ft_strlen(str);
 	len2 = ft_strlen(buffer);
 	size = ft_strlen(str) + ft_strlen(buffer);
@@ -101,6 +85,7 @@ char	*ft_strjoin(char *str, char const *buffer)
 		str[0] = '\0';
 	}
 	dest = (char *) malloc (sizeof(char) * (size + 1));//sensei dixit "nondeveallocare!!!"
+	// printf("strjoinriga89 %p\n",dest);
 	if (!dest)
 		return (NULL);
 	if (str)
@@ -110,6 +95,7 @@ char	*ft_strjoin(char *str, char const *buffer)
 	while (++j < len2)
 		dest[i++] = buffer[j];
 	dest[i] = '\0';
+	free(str);
 	return (dest);
 }
 
@@ -127,17 +113,19 @@ size_t	ft_strlcpy(char *str, const char *src, size_t size)
 	return (i);
 }
 
-char	*ft_substr(char const *s, unsigned int start, int len)
+char	*ft_substr(char *s, unsigned int start, int len)
 {
 	char	*str;
 
 	if (!s || len == 0 || start >= (size_t)ft_strlen(s))
-		return (ft_strdup(""));
+		return (NULL);
 	if (ft_strlen(s) < len)
 		len = ft_strlen(s);
 	str = (char *)malloc(sizeof(char) * (len + 1));
+	// printf("substrriga126 %p\n", str);
 	if (!str)
 		return (NULL);
 	ft_strlcpy((char *)str, (const char *)(s + start), len +1);
+	free(s);
 	return (str);
 }
