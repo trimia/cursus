@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/14 17:45:58 by mmariani          #+#    #+#             */
-/*   Updated: 2022/04/27 16:08:11 by mmariani         ###   ########.fr       */
+/*   Created: 2022/04/28 20:49:43 by mmariani          #+#    #+#             */
+/*   Updated: 2022/04/28 20:49:47 by mmariani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"get_next_line.h"
+#include"get_next_line_bonus.h"
 
 int	ft_find(char *str)
 {

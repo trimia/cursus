@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/28 20:49:13 by mmariani          #+#    #+#             */
-/*   Updated: 2022/04/28 21:10:55 by mmariani         ###   ########.fr       */
+/*   Created: 2022/03/14 16:05:59 by mmariani          #+#    #+#             */
+/*   Updated: 2022/04/28 21:10:48 by mmariani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"get_next_line.h"
+#include"get_next_line_bonus.h"
 
 static char	*readfd(char *line_n, int fd)
 {
@@ -62,23 +62,23 @@ char	*get_next_line(int fd)
 	char		*temp;
 	int			i;
 	int			j;
-	static char	*line_n = NULL;
+	static char	*line_n[1024] = {};
 
 	i = 0;
 	j = 0;
 	if (fd > 1024 || fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	line_n = readfd(line_n, fd);
-	while (line_n && line_n[i] && line_n[i] != '\n')
+	line_n[fd] = readfd(line_n[fd], fd);
+	while (line_n[fd] && line_n[fd][i] && line_n[fd][i] != '\n')
 		i++;
-	if (i == 0 && !line_n)
+	if (i == 0 && !line_n[fd])
 		return (NULL);
 	temp = (char *) malloc (i + 2);
 	if (!temp)
 		return (NULL);
-	temp = copy(line_n, temp, j);
-	if (!line_n[j])
+	temp = copy(line_n[fd], temp, j);
+	if (!line_n[fd][j])
 		free(line_n);
-	line_n = ft_substr(line_n, i + 1, ft_strlen(line_n));
+	line_n[fd] = ft_substr(line_n[fd], i + 1, ft_strlen(line_n[fd]));
 	return (temp);
 }
