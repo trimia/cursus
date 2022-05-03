@@ -6,7 +6,7 @@
 /*   By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 17:45:58 by mmariani          #+#    #+#             */
-/*   Updated: 2022/04/27 16:08:11 by mmariani         ###   ########.fr       */
+/*   Updated: 2022/05/03 19:54:23 by mmariani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,20 @@ char	*ft_strjoin(char *str, char *buffer)
 	int		i;
 	int		j;
 
-	i = -1;
-	size = ft_strlen(str) + ft_strlen(buffer);
-	if (!str)
-	{
-		str = malloc(sizeof(char));
-		str[0] = '\0';
-	}
-	dest = (char *) malloc (sizeof(char) * (size + 1));
+	size = ft_strlen(buffer);
+	j = ft_strlen(str);
+	dest = (char *) malloc (sizeof(char) * (size + j + 1));
 	if (!dest)
 		return (NULL);
-	if (str)
-		while (++i < ft_strlen(str))
-			dest[i] = str[i];
+	i = -1;
+	while (++i < j)
+		dest[i] = str[i];
 	j = -1;
-	while (++j < ft_strlen(buffer))
+	while (++j < size)
 		dest[i++] = buffer[j];
 	dest[i] = '\0';
-	free(str);
+	if (str != NULL)
+		free(str);
 	return (dest);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 16:05:59 by mmariani          #+#    #+#             */
-/*   Updated: 2022/04/28 21:10:48 by mmariani         ###   ########.fr       */
+/*   Updated: 2022/05/03 20:06:13 by mmariani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,15 @@ static char	*readfd(char *line_n, int fd)
 	buffer = (char *) malloc (BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
-	while (ft_find(line_n) && i > 0)
+	while (ft_find(line_n))
 	{
 		i = read(fd, buffer, BUFFER_SIZE);
-		if (i > 0)
-		{
-			buffer[i] = 0;
-			line_n = ft_strjoin(line_n, buffer);
-		}
-		else
-		{
-			free(buffer);
-			return (line_n);
-		}
+		if (i <= 0)
+			break ;
+		buffer[i] = 0;
+		line_n = ft_strjoin(line_n, buffer);
+		if (i < BUFFER_SIZE)
+			break ;
 	}
 	free (buffer);
 	return (line_n);
@@ -62,11 +58,11 @@ char	*get_next_line(int fd)
 	char		*temp;
 	int			i;
 	int			j;
-	static char	*line_n[1024] = {};
+	static char	*line_n[FOPEN_MAX] = {};
 
 	i = 0;
 	j = 0;
-	if (fd > 1024 || fd < 0 || BUFFER_SIZE <= 0)
+	if (fd > FOPEN_MAX || fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	line_n[fd] = readfd(line_n[fd], fd);
 	while (line_n[fd] && line_n[fd][i] && line_n[fd][i] != '\n')
