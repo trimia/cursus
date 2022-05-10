@@ -6,7 +6,7 @@
 /*   By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:46:12 by mmariani          #+#    #+#             */
-/*   Updated: 2022/05/05 19:54:37 by mmariani         ###   ########.fr       */
+/*   Updated: 2022/05/10 19:01:59 by mmariani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,78 @@
 // • %u Prints an unsigned decimal (base 10) number.
 // • %x Prints a number in hexadecimal (base 16) lowercase format.
 // • %X Prints a number in hexadecimal (base 16) uppercase format.
-// • %% Prints a percent sign.
+// // • %% Prints a percent sign.
+c = va_arg(args, int)
+s = va_arg(args, char *)
+d = va_arg(args, int)
+i = va_arg(args, int)
+u = va_arg(args, unsigned int)
+p = va_arg(args, unsigned long)# or 
+                               #(unsigned long)va_arg(args, void *);
+x = va_arg(args, unsigned int)
+X = va_arg(args, unsigned int)
 
-int	ft_printf()
+t_print	ft_initialize(t_print *tab)
 {
+	tab->wdt = 0;
+	tab->prc = 0;
+	tab->zero = 0;
+	tab->pnt = 0;
+	tab->dash = 0;
+	tab->t_l = 0;
+	tab->sign = 0;
+	tab->is_zero = 0;
+	tab->perc = 0;
+	tab->sp = 0;
+}
+
+t_type ft_initialize_type()
+{
+	2
+}
+
+int	ft_printf(char * format, ...)
+{
+	int i;
+	int n;
+	t_print *tab;
+
+	i = -1;
+	n = 0;
+	ft_initialize(tab);
+	va_start(tab->args, format);
+	while (format[++i])
+	{
+		if (format[i] == '%')
+			ft_choose(tab, format[i + 1] ,format);
+		else
+			write(1,format[i],1)
+
+
+	}
+
 
 }
 
-int	ft_cin(char * format, ...)
+int	ft_choose(t_print *tab, char x, char *format)
 {
     //serie if gestire format check % read lettera successiva + gestione flag struttura variatica
+
+	if (x == 'c')
+		ft_print_number(x);
+	else if (x == 's')
+		ft_print_char(x);
+	else if (x == 'd' || x == 'i')
+
+	else if (x == 'u')
+		
+	else if (x == 'p')
+	
+	else if (x == 'x')
+	
+	else if (x == 'X')
+		
+	
 }
 
 int	ft_print_char(char x)

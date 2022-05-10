@@ -6,13 +6,15 @@
 #    By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 16:46:20 by mmariani          #+#    #+#              #
-#    Updated: 2022/05/04 18:06:54 by mmariani         ###   ########.fr        #
+#    Updated: 2022/05/09 11:15:16 by mmariani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SCRIPT_AUTHOR = trimia
 
-NAME = libft.a
+NAME = libft_printf.a
+
+LIBFT_DIR = ../libft/Makefile
 
 SRCS = 
 OBJS = $(SRCS:.c=.o)
@@ -27,6 +29,9 @@ OBJS_BONUS = $(BONUS:.c=.o)
 
 
 all: $(NAME)
+
+$(MAKE):
+	make -C LIBFT_DIR 
 
 $(OBJS):
 	$(CC) $(CFLAGS) $(SRCS)
@@ -50,4 +55,4 @@ bonus: $(OBJS_BONUS)
 	ar rcs libft.a $(OBJS_BONUS)
 
 
-.PHONY: all fclean re clean bonus
+.PHONY: all fclean re clean bonus 
