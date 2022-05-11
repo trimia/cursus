@@ -6,7 +6,7 @@
 /*   By: mmariani <mmariani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:46:12 by mmariani          #+#    #+#             */
-/*   Updated: 2022/05/10 19:01:59 by mmariani         ###   ########.fr       */
+/*   Updated: 2022/05/11 20:49:29 by mmariani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@
 // • %x Prints a number in hexadecimal (base 16) lowercase format.
 // • %X Prints a number in hexadecimal (base 16) uppercase format.
 // // • %% Prints a percent sign.
-c = va_arg(args, int)
+c = 	
 s = va_arg(args, char *)
 d = va_arg(args, int)
 i = va_arg(args, int)
@@ -98,7 +98,7 @@ int	ft_printf(char * format, ...)
 	while (format[++i])
 	{
 		if (format[i] == '%')
-			ft_choose(tab, format[i + 1] ,format);
+			ft_choose(tab, format[i + 1], format, i);
 		else
 			write(1,format[i],1)
 
@@ -108,28 +108,27 @@ int	ft_printf(char * format, ...)
 
 }
 
-int	ft_choose(t_print *tab, char x, char *format)
+int	ft_choose(t_print *tab, char x, char *format, int i)
 {
     //serie if gestire format check % read lettera successiva + gestione flag struttura variatica
 
 	if (x == 'c')
-		ft_print_number(x);
+		ft_print_char(fomat[i]);
 	else if (x == 's')
-		ft_print_char(x);
+		ft_print_string();
 	else if (x == 'd' || x == 'i')
-
+		ft_print_number();
 	else if (x == 'u')
-		
+		// • %u Prints an unsigned decimal (base 10) number.
 	else if (x == 'p')
-	
+		// • %p The void * pointer argument has to be printed in hexadecimal format.
 	else if (x == 'x')
-	
+		// • %x Prints a number in hexadecimal (base 16) lowercase format.
 	else if (x == 'X')
-		
-	
+		// • %X Prints a number in hexadecimal (base 16) uppercase format.	
 }
 
-int	ft_print_char(char x)
+int	ft_print_char()
 {
 	write(1, x, 1);
 	return (1);
