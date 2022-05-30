@@ -130,6 +130,11 @@ int	ft_choose(t_print *tab, char x, char *format, int i)
 
 int	ft_print_char()
 {
+	int x;
+
+	va_list args;
+	va_start (args, format);
+	x = va_arg (args, int);
 	write(1, x, 1);
 	return (1);
 }
